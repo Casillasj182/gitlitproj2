@@ -1,28 +1,39 @@
 import ffmpy
 from ffmpy import FFmpeg
 import sys
+import os
+from wand.image import Image
+import imageio 
 
-imagenum=int(input("How many images do you want to use?")) ## will ask user for input 
-count=0 ## set the counter to zero so we can later increment
-list=[] ## this will hold the input by the user 
-
-while(imagenum > count): ## this will run depemding on the input of the user then it'll stop
-    count=count+1 ## will increment by one 
-    var = input("Please enter image name ") ## more input from user 
-
-    finalimages=var+".jpg" ## will get the input image names and add .jpg to the end
-    list.append(finalimages) ## this will append the list so all input is saved
-
-print(list)
-
+print("This is the gif maker!!!")
+imagenum=int(input("How many images do you want to use?"))
 
     
-ff=ffmpy.FFmpeg(
-    
-    ##store list values into the input 
-    inputs={list[0]: None}, ## this will input the 2 images I have
-    ## have user enter output name .gif
+## will ask user for input on amount of images
+var1 = input("Please enter image name ") ## more input from user to get the name 
+var2 = input("Please enter image name ")
+var3 = input("Please enter image name ")
+var4 = input("Please enter image name ")
+
+finalvar1=var1+".jpg"
+finalvar2=var2+".jpg"
+finalvar3=var3+".jpg"
+finalvar4=var4+".jpg"
+with Image() as wand:
    
-    outputs={'image.gif': None}) ## this will take the 2 images and make a gif compiled of the 3 images
-ff.run()
-    
+    with Image(filename=finalvar1) as one: ## this will add images into the sequence 
+        wand.sequence.append(one) ## this will merge the images together
+    with Image(filename=finalvar2) as two: ## this will add images into the sequence 
+        wand.sequence.append(two)
+    with Image(filename=finalvar3) as three: ## this will add images into the sequence 
+        wand.sequence.append(three) ## this will merge the images together
+    with Image(filename=finalvar4) as four: ## this will add images into the sequence 
+        wand.sequence.append(four)
+    # Create progressive delay for each frame
+    for cursor in range(imagenum): ## loop for each image and set the delay between each image
+        with wand.sequence[cursor] as frame:
+            frame.delay = 10 * (cursor + 5)
+    # Set layer type
+    wand.type = 'optimize'
+    wand.save(filename='finalimage.gif')
+    print("Gif has been made")
