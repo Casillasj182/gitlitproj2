@@ -1,3 +1,9 @@
+##Names:Joel Casillas, Francisco Hernandez, Conrado Aguilar
+##Date: 3/15/2017
+##Project: Gif Maker
+## Class: CST 205 Multimedia Design and Programming 
+##Project 2
+## This is a gif maker that takes in 8 images and it will creat a gif out of them
 import ffmpy
 from ffmpy import FFmpeg
 import sys
@@ -55,26 +61,7 @@ with Image() as wand:
             frame.speed = 100 ## this controls the speed of frames
             ##* (cursor + 5)
     # Set layer type
-    wand.type = 'optimize'
-    wand.save(filename='finalimage.gif')
+    wand.type = 'optimize' ## this will optimize it to the gif
+    wand.save(filename='finalimage.gif')## saves it as a gif
     print("Gif has been made")
-    
-    ## trying to resize the images to make it bigger
-"""
-finalvar1.size(450,281)
-finalvar1.sample(300,300)
-finalvar1.size(300,300)
-    
-finalvar2.size(450,300)
-finalvar2.sample(300,300)
-finalvar2.size(300,300)
-    
-finalvar3.size(450,281)
-finalvar3.sample(300,300)
-finalvar3.size(300,300)
-    
-finalvar4.size(450,281)
-finalvar4.sample(300,300)
-finalvar4.size(300,300)
-"""
     
