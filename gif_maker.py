@@ -4,6 +4,7 @@
 ## Class: CST 205 Multimedia Design and Programming 
 ##Project 2
 ## This is a gif maker that takes in 8 images and it will creat a gif out of them
+## https://github.com/Casillasj182/gitlitproj2.git
 import ffmpy
 from ffmpy import FFmpeg
 import sys
